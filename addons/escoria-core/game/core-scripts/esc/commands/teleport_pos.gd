@@ -55,10 +55,11 @@ func validate(arguments: Array):
 		)
 		return false
 
-	if not (escoria.object_manager.get_object(arguments[0]).node as ESCItem):
+	var teleport_node = escoria.object_manager.get_object(arguments[0]).node
+	if not teleport_node or not teleport_node.has_method("teleport_to"):
 		raise_error(
 			self,
-			"Invalid first object.  Object to teleport with global id '%s' must be of or derived from type ESCItem." % arguments[0]
+			"Invalid first object. Object to teleport with global id '%s' must be an interactable item." % arguments[0]
 		)
 		return false
 

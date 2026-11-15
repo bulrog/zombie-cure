@@ -68,9 +68,7 @@ func validate(arguments: Array):
 		)
 		return false
 
-	walking_object_node = (escoria.object_manager.get_object(
-		arguments[0]).node as ESCItem
-	)
+	walking_object_node = escoria.object_manager.get_object(arguments[0]).node
 	target_object_node = escoria.object_manager.get_object(arguments[1])
 	return true
 
@@ -105,6 +103,7 @@ func run(command_params: Array) -> int:
 ## [br]
 ## Returns nothing.
 func interrupt():
+	var current_player = escoria.room_manager.current_room.player if escoria.room_manager.current_room != null else null
 	if walking_object_node != null and is_instance_valid(walking_object_node) \
-			and not walking_object_node is ESCPlayer:
+			and walking_object_node != current_player:
 		walking_object_node.stop_walking_now()

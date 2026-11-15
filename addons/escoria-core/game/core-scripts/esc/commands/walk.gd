@@ -68,9 +68,7 @@ func validate(arguments: Array):
 		)
 		return false
 
-	walking_object_node = (escoria.object_manager.get_object(
-		arguments[0]).node as ESCItem
-	)
+	walking_object_node = escoria.object_manager.get_object(arguments[0]).node
 	target_object_node = escoria.object_manager.get_object(arguments[1])
 	return true
 

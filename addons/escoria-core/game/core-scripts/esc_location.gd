@@ -218,7 +218,13 @@ func set_interaction_angle(value: int) -> void:
 ## Returns a `bool` value. (`bool`)
 func _is_gizmo_visible() -> bool:
 	var parent: Node = get_parent()
-	if not (parent is ESCItem):
+	var parent_is_esc_item: bool = false
+	if parent is Area2D and parent.get_script() != null and parent.get_script().resource_path.ends_with("esc_item.gd"):
+		parent_is_esc_item = true
+	elif parent is ESCItem:
+		parent_is_esc_item = true
+
+	if not parent_is_esc_item:
 		return true
 
 	var selected_nodes: Array[Node] = EditorInterface.get_selection().get_selected_nodes()

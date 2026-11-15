@@ -56,6 +56,9 @@ var hotspot_focused: String = ""
 ## **Returns** Whether the function processed the event.
 var custom_input_handler = null
 
+static func _is_unselectable_player(node: Node) -> bool:
+	return node != null and "selectable" in node and not node.selectable
+
 ## The currently hovered element. Usually the one on top of the hover stack.
 var _hovered_element = null
 
@@ -203,7 +206,7 @@ func _on_hover_stack_changed():
 func set_hovered_node(item: ESCItem) -> bool:
 	if _hovered_element != item \
 			and escoria.action_manager.is_object_actionable(item.global_id) \
-			or (item is ESCPlayer and not (item as ESCPlayer).selectable):
+			or _is_unselectable_player(item):
 		_hovered_element = item
 		_hovered_element.mouse_entered()
 		return true
@@ -211,7 +214,7 @@ func set_hovered_node(item: ESCItem) -> bool:
 	# or is not actionable (not selectable for ESCPlayer) then do nothing
 	if _hovered_element == item \
 			or not escoria.action_manager.is_object_actionable(item.global_id) \
-			or (item is ESCPlayer and not (item as ESCPlayer).selectable):
+			or _is_unselectable_player(item):
 		return true
 	if not is_instance_valid(_hovered_element) or hover_stack.get_top_item() != item:
 		_hovered_element = item
@@ -430,7 +433,7 @@ func _on_mouse_exited_inventory_item() -> void:
 ## [br]
 ## Returns nothing.
 func _on_mouse_entered_item(item: ESCItem) -> void:
-	if item as ESCPlayer and not (item as ESCPlayer).selectable:
+	if _is_unselectable_player(item):
 		escoria.logger.trace(
 			self,
 			"Ignoring mouse entering player %s: Player not selectable." % [item.global_id]
@@ -478,7 +481,7 @@ func _on_mouse_exited_item(item: ESCItem) -> void:
 
 	if object and not object.interactive:
 		return
-	if object and is_instance_valid(object.node) and object.node is ESCPlayer and not (object.node as ESCPlayer).selectable:
+	if object and is_instance_valid(object.node) and _is_unselectable_player(object.node):
 		hotspot_focused = ""
 		return
 
@@ -529,7 +532,7 @@ func on_item_non_interactive(item: ESCItem) -> void:
 func _on_mouse_left_clicked_item(item: ESCItem, event: InputEvent) -> void:
 	if input_mode == INPUT_ALL:
 		# Manage clicking through ESCPlayer (if ESCPlayer.selectable is false)
-		if item as ESCPlayer and not (item as ESCPlayer).selectable:
+		if _is_unselectable_player(item):
 			escoria.logger.trace(
 				self,
 				"Ignoring left click on player %s: Player not selectable."
@@ -578,7 +581,7 @@ func _on_mouse_left_double_clicked_item(
 ) -> void:
 	if input_mode == INPUT_ALL:
 		# Manage clicking through ESCPlayer (if ESCPlayer.selectable is false)
-		if item as ESCPlayer and not (item as ESCPlayer).selectable:
+		if _is_unselectable_player(item):
 			escoria.logger.trace(
 				self,
 				"Ignoring double left click on player %s: Player not selectable."
@@ -623,7 +626,7 @@ func _on_mouse_left_double_clicked_item(
 ## Returns nothing.
 func _on_mouse_right_clicked_item(item: ESCItem, event: InputEvent) -> void:
 	if input_mode == INPUT_ALL:
-		if item as ESCPlayer and not (item as ESCPlayer).selectable:
+		if _is_unselectable_player(item):
 			escoria.logger.debug(
 				self,
 				"Ignoring right click on player %s: Player not selectable." % [item.global_id]
@@ -646,7 +649,7 @@ func _on_mouse_right_clicked_item(item: ESCItem, event: InputEvent) -> void:
 		# We check if the clicked object is ESCPlayer and not selectable. If so
 		# we consider we clicked through it.
 		var object: ESCObject = escoria.object_manager.get_object(item.global_id)
-		if object.node is ESCPlayer and not (object.node as ESCPlayer).selectable:
+		if object and is_instance_valid(object.node) and _is_unselectable_player(object.node):
 			actual_item = hover_stack.get_top_item()
 		else:
 			actual_item = item
@@ -731,7 +734,7 @@ class HoverStack:
 	## [br]
 	## Returns nothing.
 	func add_item(item):
-		if item is ESCPlayer and not (item as ESCPlayer).selectable:
+		if ESCInputsManager._is_unselectable_player(item):
 			return
 		if not hover_stack.has(item):
 			hover_stack.push_back(item)
