@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://deqhpg1vq7n3e"]
+
+[ext_resource type="Script" uid="uid://btrr8e33hu0i4" path="res://addons/escoria-core/game/core-scripts/esc_player.gd" id="1_2hdme"]
+
+[node name="Graham" type="Area2D" unique_id=978166533]
+process_mode = 1
+script = ExtResource("1_2hdme")
+global_id = "graham"
+is_movable = true
+actions_requiring_target_object = PackedStringArray()
+metadata/_custom_type_script = "uid://btrr8e33hu0i4"

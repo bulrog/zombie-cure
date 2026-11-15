@@ -1,0 +1,150 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="Escoria"
+run/main_scene="res://addons/escoria-core/game/main_scene.tscn"
+config/features=PackedStringArray("4.7")
+boot_splash/bg_color=Color(0.960784, 0.384314, 0, 1)
+boot_splash/stretch_mode=0
+boot_splash/use_filter=false
+boot_splash/image="res://addons/escoria-core/design/escoria-logo-small.png"
+config/icon="res://icon.png"
+
+[audio]
+
+buses/default_bus_layout="res://addons/escoria-core/buses/default_bus_layout.tres"
+
+[autoload]
+
+escoria="*uid://dcskv8vx80gov"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=900
+window/stretch/mode="canvas_items"
+
+[editor]
+
+search_in_file_extensions=PackedStringArray("gd", "shader", "esc")
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/escoria-core/plugin.cfg", "res://addons/escoria-dialog-simple/plugin.cfg", "res://addons/escoria-ui-simplemouse/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+
+[escoria]
+
+main/game_version="0.1.0"
+main/game_start_script="res://game/start_game.esc"
+main/force_quit=true
+main/command_directories=["res://addons/escoria-core/game/core-scripts/esc/commands"]
+main/text_lang="fr_FR"
+main/voice_lang="fr_FR"
+main/savegames_path="res://saves/"
+main/settings_path="user://"
+main/game_migration_path=""
+debug/terminate_on_warnings=false
+debug/terminate_on_errors=true
+debug/development_lang="en"
+debug/log_level="DEBUG"
+debug/log_file_path="user://"
+debug/crash_message="We're sorry, but the game crashed. Please send us the following files:
+
+%s"
+debug/enable_room_selector=true
+debug/room_selector_room_dir="res://game/rooms"
+ui/game_scene="res://addons/escoria-ui-simplemouse/game.tscn"
+ui/inventory_items_path="res://game/items/inventory"
+ui/default_transition="instant"
+ui/transition_paths=["res://addons/escoria-core/game/scenes/transitions/shaders/"]
+ui/inventory_item_size=Vector2(72, 72)
+ui/dialog_managers=["res://addons/escoria-dialog-simple/esc_dialog_simple.gd"]
+sound/master_volume=1
+sound/music_volume=1
+sound/sfx_volume=1
+sound/speech_volume=1
+sound/speech_folder="res://game/speech"
+sound/speech_extension="ogg"
+sound/ambient_volume=1
+platform/skip_cache=false
+platform/skip_cache.mobile=true
+sound/speech_enabled=1
+ui/tooltip_follows_mouse=false
+ui/dialogs_chooser="res://addons/escoria-core/ui_library/dialogs/text_dialog_chooser.tscn"
+ui/default_dialog_scene="res://addons/escoria-core/ui_library/dialogs/floating_dialog_player.tscn"
+main/action_default_script="res://action_defaults.esc"
+dialog_simple/text_speed_per_character=0.1
+dialog_simple/fast_text_speed_per_character=0.25
+debug/enable_hover_stack_viewer=true
+main/escoria_version="4.0-alpha"
+debug/perform_script_analysis_at_runtime=true
+wizard/path_to_rooms="res://game/rooms"
+main/save_sounds_playback_position=true
+ui/default_dialog_type="floating"
+dialog_simple/avatars_path="res://game/dialog_avatars"
+dialog_simple/text_time_per_letter_ms=100
+dialog_simple/text_time_per_fast_letter_ms=25
+dialog_simple/clear_text_by_click_only=false
+dialog_simple/reading_speed_in_wpm=200
+dialog_simple/left_click_action="Speed up"
+dialog_simple/stop_talking_animation_on="End of audio"
+
+[file_customization]
+
+folder_colors={
+"res://game/rooms/": "teal"
+}
+
+[gdunit4]
+
+settings/test/test_lookup_folder="testing"
+
+[input]
+
+esc_show_debug_prompt={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194333,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+esc_change_verb={
+"deadzone": 0.2,
+"events": []
+}
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://game/translations/game.de.translation", "res://game/translations/game.en.translation", "res://game/translations/game.es.translation", "res://game/translations/game.fr.translation", "res://game/translations/main_menu.de.translation", "res://game/translations/main_menu.en.translation", "res://game/translations/main_menu.es.translation", "res://game/translations/main_menu.fr.translation")
+
+[locale]
+
+translations=PackedStringArray("res://game/translations/game.en.translation", "res://game/translations/game.fr.translation", "res://game/translations/main_menu.en.translation", "res://game/translations/main_menu.fr.translation", "res://game/translations/game.de.translation", "res://game/translations/main_menu.de.translation", "res://game/translations/game.es.translation", "res://game/translations/main_menu.es.translation")
+locale_filter=[0, []]
+translation_remaps={
+"res://game/speech/room01/ROOM1_look_wall_item_1.ogg": PackedStringArray("res://game/speech/room01/ROOM1_look_wall_item_1_de.ogg:de"),
+"res://game/speech/room01/ROOM1_look_wall_item_2.ogg": PackedStringArray("res://game/speech/room01/ROOM1_look_wall_item_2_de.ogg:de"),
+"res://game/speech/room01/ROOM1_look_wall_item_3.ogg": PackedStringArray("res://game/speech/room01/ROOM1_look_wall_item_3_de.ogg:de"),
+"res://game/speech/room01/ROOM1_look_wall_item_4.ogg": PackedStringArray("res://game/speech/room01/ROOM1_look_wall_item_4_de.ogg:de")
+}
+
+[network]
+
+limits/debugger/max_chars_per_second=99999999
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_environment="res://default_env.tres"
